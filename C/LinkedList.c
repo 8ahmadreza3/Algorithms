@@ -170,16 +170,16 @@ void sortlist(node* head){
 }
 
 int main(){
-  node* head = newNode(0);
-  addEnd(head , newNode(5));
-  addEnd(head , newNode(10));
-  addHead(&head , newNode(25));
-  insert(&head , 1 , newNode(15));
-  write(head , 4 , 20);
+  node* head = newNode(23);
+  addEnd(head , newNode(53));
+  addEnd(head , newNode(13));
+  addHead(&head , newNode(5));
+  insert(&head , 1 , newNode(65));
+  write(head , 4 , 24);
   printf("Your Value: %d\n", read(head , 3));
   removevalue(&head , 3);
   //deletelink(&head);
-  replace(head , 5 , 35);
+  replace(head , 5 , 39);
   sortlist(head);
   print(head);
   return 0;
