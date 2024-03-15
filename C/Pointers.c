@@ -4,14 +4,14 @@
 
 void stringnavigation(int n)
 {
-  char* ptr = NULL
+  char* ptr = NULL;
   ptr = (char*)calloc(n,sizeof(char));
-  printf("Enter your text\n")
+  printf("Enter your text\n");
   gets(ptr);
   for(int i=0 ; i<n; ++i){
     printf("\n%d: %d", i, *(ptr+i));
   }
-  free(ptr)
+  free(ptr);
 }
 
 int main()
