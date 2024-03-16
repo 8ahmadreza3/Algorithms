@@ -8,7 +8,7 @@ typedef struct __Node__{
 } node;
 
 node *newnode(int value){
-node *output=(node*)malloc(sizeof(node));
+  node *output=(node*)malloc(sizeof(node));
   output->value = value ;
   output->next_x = output->next_y = NULL ;
   return output ;
