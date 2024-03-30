@@ -1,0 +1,4 @@
+- [Rod Cut Problem](https://algorithm-wiki.csail.mit.edu/wiki/Rod-Cutting_Problem)
+- [Matrix Chain Problem](https://en.wikipedia.org/wiki/Matrix_chain_multiplication)
+- [Knap Sack Problem](https://en.wikipedia.org/wiki/Knapsack_problem)
+- [Change Making Problem](https://en.wikipedia.org/wiki/Change-making_problem)
