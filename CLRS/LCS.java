@@ -20,6 +20,28 @@ public class LCS {
     }
   }
 
+  public static int lcsBU(char[] x, char[] y, int m, int n){
+    int[][] c = new int[m+1][n+1] ;
+    for(int i=0 ; i<=m ; i++){
+      c[i][0] = 0 ;
+    }
+
+    for(int j=0 ; j<=n ; j++){
+      c[0][j] = 0 ;
+    }
+    for(int i = 0; i <= m; i++) {
+      for (int j = 0; j <= n; j++) {
+        if (i == 0 || j == 0)
+          c[i][j] = 0 ;
+        else if (x[i-1] == y[j-1])
+          c[i][j] = c[i - 1][j - 1] + 1 ;
+        else
+          c[i][j] = Math.max(c[i - 1][j], c[i][j - 1]) ;
+      }
+    }
+    return c[m][n] ;
+  }
+
   public static void main(String[] args){
     // string should start with space
     char[] x = " ahmadreza".toCharArray();
@@ -27,7 +49,7 @@ public class LCS {
     int m = x.length ;
     int n = y.length ;
     int[][] r = new int[m][n] ;
-    System.out.println("Top Down: Longest common subsequence is: " + lcsTD(x, y, m-1, n-1, r));
-    System.out.println();
+    System.out.println("Top Down: Longest common subsequence is: " + lcsTD(x, y, m-1, n-1, r)) ;
+    System.out.println("Bottom Up: Longest common subsequence is: " + lcsBU(x, y, m-1, n-1)) ;
   }
 }
