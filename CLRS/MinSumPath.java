@@ -1,6 +1,6 @@
 import java.util.Arrays;
 
-public class SumPath {
+public class MinSumPath {
     public static int minPath(int i, int j, int[][] array, int[][] r, int[] s){
         if(r[i][j]>0){
             return r[i][j];
@@ -33,5 +33,4 @@ public class SumPath {
         }
         System.out.println(min);
     }
-
 }
