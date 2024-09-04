@@ -1,5 +1,3 @@
-package S06_GraphAlgorithms.Chapter22;
-
 import java.util.*;
 
 public class Graph {
