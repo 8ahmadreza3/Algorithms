@@ -1,8 +1,9 @@
 import java.util.*;
 
-class SingleSource {
-    int V;
+class SingleSourceShortestPaths {
     List<List<Pair>> adj;
+    int V, E;
+    Edge edge[];
 
     static class Pair {
         int first, second;
@@ -19,6 +20,14 @@ class SingleSource {
         for (int i = 0; i < V; i++) {
             adj.add(new ArrayList<>());
         }
+    }
+
+    SingleSourceShortestPaths(int v, int e) {
+        V = v;
+        E = e;
+        edge = new Edge[e];
+        for (int i = 0; i < e; ++i)
+            edge[i] = new Edge();
     }
 
     void addEdge(int u, int v, int w) {
@@ -66,17 +75,15 @@ class SingleSource {
             System.out.println(i + " ==> " + dist[i]);
     }
 
-    void dijkstra(int graph[][], int src) {
+    void dijkstra(int[][] graph, int src) {
         int[] dist = new int[V];
         Boolean[] sptSet = new Boolean[V];
-
         for (int i = 0; i < V; i++) {
             dist[i] = Integer.MAX_VALUE;
             sptSet[i] = false;
         }
 
         dist[src] = 0;
-
         for (int count = 0; count < V - 1; count++) {
             int u = minDistance(dist, sptSet);
             sptSet[u] = true;
@@ -85,5 +92,45 @@ class SingleSource {
                     dist[v] = dist[u] + graph[u][v];
         }
         printSolution(dist);
+    }
+
+    static class Edge {
+        int src, dest, weight;
+        public Edge() {
+            src = dest = weight = 0;
+        }
+    }
+
+    void BellmanFord(int src) {
+        int[] dist = new int[V];
+        for (int i = 0; i < V; ++i)
+            dist[i] = Integer.MAX_VALUE;
+
+        dist[src] = 0;
+
+        for (int i = 1; i < V; ++i) {
+            for (int j = 0; j < E; ++j) {
+                int u = edge[j].src;
+                int v = edge[j].dest;
+                int weight = edge[j].weight;
+                if (dist[u] != Integer.MAX_VALUE && dist[u] + weight < dist[v])
+                    dist[v] = dist[u] + weight;
+            }
+        }
+        for (int j = 0; j < E; ++j) {
+            int u = edge[j].src;
+            int v = edge[j].dest;
+            int weight = edge[j].weight;
+            if (dist[u] != Integer.MAX_VALUE && dist[u] + weight < dist[v]) {
+                System.out.println("Graph contains negative weight cycle");
+                return;
+            }
+        }
+        printArr(dist, V);
+    }
+
+    void printArr(int[] dist, int V) {
+        for (int i = 0; i < V; ++i)
+            System.out.println(i + "   " + dist[i]);
     }
 }
