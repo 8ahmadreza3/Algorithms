@@ -1,6 +1,6 @@
 import java.util.*;
 
-class SingleSourceShortestPaths {
+class SingleSource {
     List<List<Pair>> adj;
     int V, E;
     Edge edge[];
@@ -14,7 +14,7 @@ class SingleSourceShortestPaths {
         }
     }
 
-    SingleSourceShortestPaths(int V) {
+    SingleSource(int V) {
         this.V = V;
         adj = new ArrayList<>();
         for (int i = 0; i < V; i++) {
@@ -22,7 +22,7 @@ class SingleSourceShortestPaths {
         }
     }
 
-    SingleSourceShortestPaths(int v, int e) {
+    SingleSource(int v, int e) {
         V = v;
         E = e;
         edge = new Edge[e];
