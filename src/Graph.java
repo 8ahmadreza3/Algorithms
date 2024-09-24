@@ -1,97 +1,70 @@
 import java.util.*;
 
 public class Graph {
-    int V;
-    static int WHITE = 0, GRAY = 1, BLACK = 2;
-    List<Integer>[] adjList;
-    String[] color;
-    int[] d, p;
+    List<Node> nodes = new LinkedList<Node>();
+    static int WHITE = 0, GRAY = 1, BLACK = 2 , timer = 0;
 
-    public Graph(int v) {
-        V = v;
-        adjList = new LinkedList[v];
-        for (int i = 0; i < v; i++)
-            adjList[i] = new LinkedList<Integer>();
+    class Node{
+        String label;
+        int color;
+        int d ;
+        int f ;
+        List<Node> neighbors = new LinkedList<Node>();
+        Node parent = null ;
     }
 
-    void addEdge(int u, int v) {
-        adjList[u].add(v);
-    }
-
-    void BFSSingleSource(int s) {
-        Queue<Integer> q = new LinkedList<>();
-        q.add(s);
-        d[s] = 0;
-        color[s] = "green";
-        while (!q.isEmpty()) {
-            int u = q.poll();
-            System.out.print(u + " ");
-            for (Object index : adjList[u]) {
-                int i = (int) index ;
-                if (Objects.equals(color[i], "white")) {
-                    color[i] = "green";
-                    d[i] = d[u] + 1;
-                    p[i] = u;
-                    q.add(i);
+    void BFS(Node root){
+        for(Node u: nodes){
+            u.parent = null ;
+            u.d = Integer.MAX_VALUE ;
+            u.color = WHITE ;
+            Queue<Node> q = new Queue<Node>();
+            System.out.println(u.label);
+        }
+        root.color = GRAY ;
+        root.d = 0;
+        q.enqueue(root) ;
+        while(!q.isEmpty()){
+            Node u = q.dequeue();
+            for(Node v : u.neighbors){
+                if(v.color == WHITE){
+                    System.out.println(v.label);
+                    v.parent = u ;
+                    v.d = u.d + 1 ;
+                    v.color = Gray ;
+                    q.enqueue(v);
                 }
             }
-            color[u] = "dark_green";
-        }
-        System.out.println();
-    }
-
-    void BFSFull(int n) {
-        color = new String[n];
-        d = new int[n];
-        p = new int[n];
-        Arrays.fill(color, "white");
-        Arrays.fill(d, 0);
-        Arrays.fill(p, -1);
-        for (int i = 0; i < n; i++) {
-            if (color[i] == "white")
-                BFSSingleSource(i);
+            u.color = BLACK ;
         }
     }
 
-    boolean DFSUtil(int u, int[] color) {
-        color[u] = GRAY;
-        for (Integer in : adjList[u]) {
-            if (color[in] == GRAY)
-                return true;
-
-            if (color[in] == WHITE && DFSUtil(in, color))
-                return true;
+    void DFS(){
+        for(Node u : nodes){
+            u.parent = null ;
+            u.d = Integet.MAX_VALUE ;
+            u.color = WHITE ;
+            u.f = Integer.MAX_VALUE ;
         }
-        color[u] = BLACK;
-        return false;
-    }
-
-    boolean isCyclic(Graph g) {
-        int[] color = new int[g.V];
-        for (int i = 0; i < g.V; i++) {
-            color[i] = WHITE;
-        }
-        for (int i = 0; i < g.V; i++) {
-            if (color[i] == WHITE)
-                if(DFSUtil(i, color))
-                    return true;
-        }
-        return false;
-    }
-
-    void DFSRec(boolean[] visited, int s){
-        visited[s] = true;
-        System.out.print(s + " ");
-
-        for (int i : adjList[s]) {
-            if (!visited[i])
-                DFSRec(visited, i);
+        for(Node u : nodes){
+            if(u.color == WHITE){
+                u.color = GRAY ;
+                u.d = ++timer ;
+                dfs_visit(u);
+            }
         }
     }
 
-    void DFS(int s) {
-        boolean[] visited = new boolean[adjList.length];
-        DFSRec(visited, s);
+    void dfs_visit(Node u){
+        for(Node v: u.neighbors){
+            if(v.color == WHITE){
+                v.parent = u ;
+                v.d = ++timer ;
+                v.color = GRAY ;
+                dfs_visit(v);
+            }
+        }
+        u.color = BLACK ;
+        u.f = ++timer ;
     }
 }
-
