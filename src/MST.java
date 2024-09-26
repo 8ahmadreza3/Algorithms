@@ -69,7 +69,7 @@ class KruskalsMST {
         }
     }
 
-    private static void kruskals(int V, List<Edge> edges) {
+    static void kruskals(int V, List<Edge> edges) {
         int j = 0;
         int noOfEdges = 0;
         Subset subsets[] = new Subset[V];
@@ -98,7 +98,7 @@ class KruskalsMST {
         System.out.println("Total cost of MST: " + minCost);
     }
 
-    private static void union(Subset[] subsets, int x, int y) {
+    static void union(Subset[] subsets, int x, int y) {
         int rootX = findRoot(subsets, x);
         int rootY = findRoot(subsets, y);
         if (subsets[rootY].rank < subsets[rootX].rank)
@@ -111,7 +111,7 @@ class KruskalsMST {
         }
     }
 
-    private static int findRoot(Subset[] subsets, int i) {
+    static int findRoot(Subset[] subsets, int i) {
         if (subsets[i].parent == i)
             return subsets[i].parent;
 
