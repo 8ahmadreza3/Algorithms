@@ -21,7 +21,7 @@ public class LPS {
   }
 
   public static int lpsTD(char[] x, int i, int j, int[][] r) {
-    if ((i == 0 || j == 0) && (i > j)) {
+    if (i > j) {
       return 0 ;
     }
     if (i == j) {

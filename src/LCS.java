@@ -1,12 +1,11 @@
 public class LCS {
 
   public static int lcsTD(char[] x, char[] y, int m, int n, int[][] r){
-    if (m == 0 || n == 0){
+    if (m == 0 || n == 0)
       return 0 ;
-    }
-    if (r[m][n] > 0){
+    if (r[m][n] > 0)
       return r[m][n] ;
-    }
+
     if (x[m] == y[n]){
       int p = lcsTD(x, y, m-1, n-1, r) + 1 ;
       r[m][n] = p ;
@@ -22,13 +21,12 @@ public class LCS {
 
   public static int lcsBU(char[] x, char[] y, int m, int n){
     int[][] c = new int[m+1][n+1] ;
-    for(int i=0 ; i<=m ; i++){
+    for(int i=0 ; i<=m ; i++)
       c[i][0] = 0 ;
-    }
 
-    for(int j=0 ; j<=n ; j++){
+    for(int j=0 ; j<=n ; j++)
       c[0][j] = 0 ;
-    }
+
     for(int i = 0; i <= m; i++) {
       for (int j = 0; j <= n; j++) {
         if (i == 0 || j == 0)
